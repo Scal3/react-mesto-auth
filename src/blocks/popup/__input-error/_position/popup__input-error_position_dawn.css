@@ -1,0 +1,9 @@
+.popup__input-error_position_dawn {
+    top: 192px;
+}
+
+@media screen and (min-width: 880px) {
+    .popup__input-error_position_dawn {
+        top: 178px;
+    }
+}

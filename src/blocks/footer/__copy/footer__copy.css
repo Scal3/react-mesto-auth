@@ -1,0 +1,19 @@
+.footer__copy {
+    color: #545454;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 36px;
+    margin-top: 0;
+}
+
+@media screen and (min-width: 880px) {
+    .footer__copy {
+        text-align: left;
+        margin-bottom: 60px;
+        margin-top: 67px;
+        font-size: 18px;
+        line-height: 22px;
+    }
+}

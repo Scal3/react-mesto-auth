@@ -1,0 +1,9 @@
+.profile__xl-container {
+    display: block;
+}
+
+@media screen and (min-width: 880px) {
+    .profile__xl-container {
+        display: flex;
+    }
+}

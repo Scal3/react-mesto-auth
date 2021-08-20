@@ -1,0 +1,9 @@
+.popup__input-error_position_up {
+    top: 141px;
+}
+
+@media screen and (min-width: 880px) {
+    .popup__input-error_position_up {
+        top: 128px;
+    }
+}

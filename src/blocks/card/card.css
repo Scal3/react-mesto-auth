@@ -1,0 +1,14 @@
+.card {
+    background-color: #fff;
+    width: 282px;
+    border-radius: 4%;
+    margin: 0 auto;
+    min-height: 361px;
+    position: relative;
+}
+
+@media screen and (min-width:880px) {
+    .card {
+        margin: 0;
+    }
+}

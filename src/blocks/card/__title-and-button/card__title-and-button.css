@@ -1,0 +1,6 @@
+.card__title-and-button {
+    width: 246px;
+    display: flex;
+    justify-content: space-between;
+    margin: 16px auto 31px auto;
+}

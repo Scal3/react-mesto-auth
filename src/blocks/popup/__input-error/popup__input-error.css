@@ -1,0 +1,18 @@
+.popup__input-error {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+    color: #FF0000;
+    position: absolute;
+    left: 23px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+@media screen and (min-width: 880px) {
+    .popup__input-error {
+        margin-left: 36px;
+        left: 0;
+    }
+}

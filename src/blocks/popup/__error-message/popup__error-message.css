@@ -1,0 +1,15 @@
+.popup__error-message {
+  margin-left: 50px;
+  margin-right: 50px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 22px;
+}
+
+@media screen and (min-width: 880px) {
+  .popup__error-message {
+      font-size: 18px;
+      line-height: 22px;
+  }
+}
