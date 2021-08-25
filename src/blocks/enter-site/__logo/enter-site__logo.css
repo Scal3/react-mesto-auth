@@ -1,0 +1,12 @@
+.enter-site__logo {
+  margin-left: 30px;
+  width: 104px;
+  height: 25px;
+}
+
+@media screen and (min-width: 880px) {
+  .enter-site__logo {
+      width: 142px;
+      height: 43px;
+  }
+}

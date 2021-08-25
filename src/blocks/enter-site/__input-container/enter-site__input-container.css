@@ -1,0 +1,6 @@
+.enter-site__input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 170px;
+}

@@ -1,0 +1,25 @@
+.enter-site__input {
+  background-color: black;
+  border: none;
+  border-bottom: 2px solid #CCCCCC;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  color: #CCCCCC;
+  width: 260px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  margin-bottom: 30px;
+}
+
+.enter-site__input:last-of-type {
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 880px) {
+  .enter-site__input {
+    width: 358px;
+  }
+}

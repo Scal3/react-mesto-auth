@@ -1,0 +1,22 @@
+.enter-site__reg-btn {
+  background-color: transparent;
+  border: none;
+  color: white;
+  margin-right: 30px;
+  padding: 0;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.enter-site__reg-btn:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+
+@media screen and (min-width: 880px) {
+  .enter-site__reg-btn {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}

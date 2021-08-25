@@ -1,0 +1,15 @@
+.register__entr-btn {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #fff;
+  border: none;
+  background-color: inherit;
+  padding: 0;
+  margin-left: 5px;
+}
+
+.register__entr-btn:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}

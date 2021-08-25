@@ -1,8 +1,5 @@
 .header__logo {
     margin-left: 27px;
-    background-image: url(../../../images/logo.svg);
-    background-repeat: no-repeat;
-    background-size: contain;
     width: 104px;
     height: 25px;
 }
@@ -10,7 +7,6 @@
 @media screen and (min-width: 880px) {
     .header__logo {
         margin-left: 0;
-        background-image: url(../../../images/logoXL.svg);
         width: 142px;
         height: 43px;
     }

@@ -1,6 +1,5 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
-
+import { useState, useEffect} from 'react'
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -10,6 +9,14 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext'
 import EditProfilePopup from './EditProfilePopup'
 import EditAvatarPopup from './EditAvatarPopup'
 import AddPlacePopup from './AddPlacePopup'
+import { Route, Switch, Redirect } from 'react-router-dom'
+import Login from './Login'
+import Register from './Register'
+import ProtectedRoute from './ProtectedRoute'
+import * as mestoAuth from '../utils/mestoAuth'
+import { useHistory } from 'react-router-dom'
+
+
 
 function App() {
 
@@ -19,6 +26,9 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({name: '', link: ''});  //Стэйт кликнутой карточки
   const [currentUser, setCurrentUser] = useState({})  //Стэйт данных пользователя
   const [cards, setCards] = useState([]); //Стэйт массива для карточек
+  const [loggedIn, setLoggedIn] = useState(false) //Стэйт для защиты роутов
+  const [email, setEmail] = useState('') //Стэйт для защиты роутов
+  const history = useHistory()
 
 
   //Получаем данные пользователя и список карточек
@@ -31,8 +41,48 @@ function App() {
       .catch((e) => {
         console.log(`Ошибка загрузки данных: ${e}`)
       })
+    tokenCheck()
   }, [])
 
+ //Проверка токена и подстановка данных
+  function tokenCheck() {
+    if (localStorage.getItem('token')){
+      const token = localStorage.getItem('token');
+      mestoAuth.getContent(token)
+      .then(res => {
+        setEmail(res.data.email)
+        setLoggedIn(true)
+        history.push('/')
+      })
+      .catch(err => console.log(err))
+    }
+  }
+
+  //Переход основной сайт
+  function onLogin(){
+    history.push('/')
+  }
+
+  //Переход на роут логина
+  function switchToLogin(){
+    history.push('/sign-in')
+  }
+
+  //Переход на роут регистрации
+  function switchToRegistration(){
+    history.push('/sign-up')
+  }
+
+  //Выход из системы
+  function signOut(){
+    localStorage.removeItem('token');
+    history.push('/sign-in');
+  }
+
+  //Обработчик для допуска к роуту "/"
+  function handleLogin(){
+    setLoggedIn(true)
+  }
 
   //Обработчик клика по карточке
   function handleCardClick(card) {
@@ -139,30 +189,89 @@ function App() {
   return (
     <div>
     <CurrentUserContext.Provider value={currentUser}>
-      <Header />
+      <Switch>
 
-      <Main 
-      onEditProfile={handleEditProfileClick} 
-      onAddPlace={handleAddPlaceClick} 
-      onEditAvatar={handleEditAvatarClick} 
-      cardImageClick={handleCardClick}
-      cards={cards}
-      onCardLike={handleCardLike}
-      onCardDelete={handleCardDelete}
-      />
+        <Route path="/" exact>
+          {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}
 
-      <Footer />
 
-      <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/> 
+          <ProtectedRoute
+            path="/header"
+            loggedIn={loggedIn}
+            email={email}
+            component={Header}
+            signOut={signOut}
+          />
 
-      <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
+          <ProtectedRoute
+            path="/main"
+            loggedIn={loggedIn}
+            component={Main}
+            onEditProfile={handleEditProfileClick} 
+            onAddPlace={handleAddPlaceClick} 
+            onEditAvatar={handleEditAvatarClick}
+            cardImageClick={handleCardClick}
+            cards={cards}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
+          />
 
-      <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} />
+          <ProtectedRoute
+            path="/footer"
+            loggedIn={loggedIn}
+            component={Footer}
+          />
 
-      <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
+          <ProtectedRoute
+            path="/EditProfilePopup"
+            loggedIn={loggedIn}
+            component={EditProfilePopup}
+            isOpen={isEditProfilePopupOpen} 
+            onClose={closeAllPopups} 
+            onUpdateUser={handleUpdateUser}
+          />
+
+          <ProtectedRoute
+            path="/EditAvatarPopup"
+            loggedIn={loggedIn}
+            component={EditAvatarPopup}
+            isOpen={isEditAvatarPopupOpen} 
+            onClose={closeAllPopups} 
+            onUpdateAvatar={handleUpdateAvatar}
+          />
+
+          <ProtectedRoute
+            path="/AddPlacePopup"
+            loggedIn={loggedIn}
+            component={AddPlacePopup}
+            isOpen={isAddPlacePopupOpen} 
+            onClose={closeAllPopups} 
+            onAddPlace={handleAddPlaceSubmit}
+          />
+
+          <ProtectedRoute
+            path="/ImagePopup"
+            loggedIn={loggedIn}
+            component={ImagePopup}
+            card={selectedCard} 
+            onClose={closeAllPopups}
+          />
+        </Route>  
+
+        <Route path="/sign-up">
+          <Register switchToLogin={switchToLogin}></Register>
+        </Route>
+
+        <Route path="/sign-in">
+          <Login handleLogin={handleLogin} switchToRegistration={switchToRegistration} onLogin={onLogin}></Login>
+        </Route>
+      </Switch>
     </CurrentUserContext.Provider>
   </div>
   )
 }
 
 export default App
+
+
+
