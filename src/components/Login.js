@@ -15,10 +15,12 @@ export default function Login(props) {
   const handleSubmit = e => {
     e.preventDefault()
     mestoAuth.authorization(pass, email)
-    props.handleLogin()
-    props.onLogin()
-    setEmail('')
-    setPass('')
+    .then(() => {
+      props.handleLogin()
+      props.onLogin()
+      setEmail('')
+      setPass('')
+    })
   }
 
  

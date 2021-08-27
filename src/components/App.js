@@ -54,7 +54,12 @@ function App() {
         setLoggedIn(true)
         history.push('/')
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        if(!token) {
+          localStorage.removeItem('token')
+        }
+        console.log(err)
+      })
     }
   }
 

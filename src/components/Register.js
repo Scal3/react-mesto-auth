@@ -16,9 +16,11 @@ export default function Register(props) {
   const handleSubmit = e => {
     e.preventDefault()
     mestoAuth.registration(pass, email)
-    setEmail('')
-    setPass('')
-    props.switchToLogin()
+    .then(() => {
+      setEmail('')
+      setPass('')
+      props.switchToLogin()
+    })
   }
   
 
