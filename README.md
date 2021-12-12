@@ -11,5 +11,3 @@ __Используя наработки четвёртого проекта__ и
 * Авторизация по токену в теле запроса
 * API аутентификации - `https://auth.nomoreparties.co`
 * API с данными и карточками - `https://mesto.nomoreparties.co/v1/cohort-24`
-
-LINK - https://scal3.github.io/react-mesto-auth/
